@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d17">
+<title>Diskotek · CD koleksiyonum</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💿</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d17;--bg2:#10142a;--card:#151a33;--ink:#f1f2fa;--mut:#8f97ba;--line:#262c4b;--acc:#8f86ff;--accx:#0b0d17;--bad:#ff7a87;--holo:conic-gradient(from 20deg,#ff7ab8,#ffd36e,#7cf0b4,#6ec8ff,#a58bff,#ff7ab8);color-scheme:dark}
+@media(prefers-color-scheme:light){:root{--bg:#f3f1ee;--bg2:#e9e6e1;--card:#fff;--ink:#14162a;--mut:#6a6f8c;--line:#d9d5ce;--acc:#4b3fe0;--accx:#fff;--bad:#c2303f;color-scheme:light}}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:radial-gradient(900px 500px at 85% -10%,#8f86ff22,transparent),var(--bg);color:var(--ink);font:400 16px/1.5 "Bricolage Grotesque",system-ui,sans-serif;min-height:100vh;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+header{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 18px 10px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:1.3rem;letter-spacing:-.02em;display:flex;align-items:center;gap:9px;margin-right:auto}
+.mini{width:26px;height:26px;border-radius:50%;background:var(--holo);position:relative}.mini::after{content:"";position:absolute;inset:36%;border-radius:50%;background:var(--bg)}
+.search{width:min(340px,48vw)}
+input,select,textarea{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 13px;width:100%}
+textarea{resize:vertical;min-height:64px}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:10px 16px;cursor:pointer;font-weight:600;white-space:nowrap}
+.btn.p{background:var(--holo);color:#0b0d17;border:0}
+.btn.d{color:var(--bad)}
+.dsk{display:none;gap:8px}
+@media(min-width:800px){.dsk{display:flex}.tabs{display:none!important}body{padding-bottom:40px}}
+main{max-width:1240px;margin:0 auto;padding:22px 18px}
+.hero{display:flex;gap:26px;align-items:center;margin-bottom:26px;flex-wrap:wrap}
+.bigdisc{width:132px;height:132px;border-radius:50%;background:var(--holo);position:relative;flex:none;animation:sp 14s linear infinite;box-shadow:0 12px 50px #8f86ff40}
+.bigdisc::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle,#0000 0 3px,#0000001a 3px 4px)}
+.bigdisc::after{content:"";position:absolute;inset:38%;border-radius:50%;background:var(--bg);box-shadow:0 0 0 5px #ffffff30}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.bigdisc{animation:none}.frame::after{animation:none}}
+h1{margin:0;font-weight:800;font-size:clamp(2.6rem,8vw,4.6rem);line-height:1;letter-spacing:-.04em}
+.sub{color:var(--mut);margin:6px 0 12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:none;border-radius:99px;padding:5px 13px;cursor:pointer;color:var(--mut)}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar{display:flex;gap:8px;margin-bottom:18px;align-items:center;justify-content:space-between}
+.bar select{width:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:26px 24px}
+@media(min-width:800px){.grid{grid-template-columns:repeat(auto-fill,minmax(188px,1fr))}}
+.cd{background:none;border:0;padding:0;text-align:left;cursor:pointer;display:block}
+.wrap{position:relative;aspect-ratio:1}
+.dk{position:absolute;top:3%;left:3%;width:94%;aspect-ratio:1;border-radius:50%;background:var(--holo);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.dk::after{content:"";position:absolute;inset:38%;border-radius:50%;background:var(--bg)}
+.cd:hover .dk,.cd:focus-visible .dk{transform:translateX(15%) rotate(40deg)}
+.cv{position:absolute;inset:0;border-radius:3px 8px 8px 3px;overflow:hidden;box-shadow:0 10px 26px #0007;background:var(--line);display:grid;place-items:center;font-size:2.6rem}
+.cv img{width:100%;height:100%;object-fit:cover;display:block}
+.cv::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(90deg,#0006,#fff2 55%,#0000);z-index:1}
+.cv::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#fff0 40%,#ffffff2a 50%,#fff0 60%);pointer-events:none}
+.cd .t{padding-top:10px}
+.cd b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25}
+.cd small{color:var(--mut)}
+.empty{text-align:center;color:var(--mut);padding:50px 10px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;display:grid;grid-template-columns:1fr 84px 1fr;align-items:center;gap:6px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.tabs .btn{border:0;background:none;font-size:.85rem;color:var(--mut)}
+.fab{width:68px;height:68px;border-radius:50%;border:0;background:var(--holo);margin:-34px auto 0;box-shadow:0 8px 28px #8f86ff66;cursor:pointer;font-weight:800;color:#0b0d17}
+/* diyaloglar */
+dialog{border:1px solid var(--line);border-radius:20px;background:var(--bg2);color:var(--ink);padding:0;width:min(580px,calc(100vw - 20px));max-height:92vh}
+dialog::backdrop{background:#000a;backdrop-filter:blur(3px)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);font-weight:800}
+.db{padding:16px 18px;display:grid;gap:12px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:grid;gap:4px;font-size:.85rem;color:var(--mut)}
+.cov{display:flex;gap:14px;align-items:center}
+.cov img{width:112px;height:112px;object-fit:cover;border-radius:4px 10px 10px 4px;background:var(--line);box-shadow:0 8px 22px #0006}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+dialog.cam{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0;background:#000;overflow:hidden;color:#fff}
+dialog.cam[open]{display:block}
+#vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shade{position:absolute;inset:0;background:linear-gradient(#000a,#0000 22%,#0000 45%,#000d)}
+.top{position:absolute;top:0;left:0;right:0;padding:calc(12px + env(safe-area-inset-top)) 14px;display:flex;gap:10px;align-items:center;z-index:2}
+.top .btn{background:#0008;color:#fff;border-color:#fff3}
+.steps{display:flex;gap:6px;margin-left:auto}.steps i{font-style:normal;padding:5px 12px;border-radius:99px;background:#0008;font-size:.82rem;border:1px solid #fff3}.steps i.on{background:#fff;color:#000}
+.frame{position:absolute;left:9%;right:9%;top:16%;bottom:36%;--c:#fff;background:linear-gradient(var(--c),var(--c)) 0 0/32px 4px,linear-gradient(var(--c),var(--c)) 0 0/4px 32px,linear-gradient(var(--c),var(--c)) 100% 0/32px 4px,linear-gradient(var(--c),var(--c)) 100% 0/4px 32px,linear-gradient(var(--c),var(--c)) 0 100%/32px 4px,linear-gradient(var(--c),var(--c)) 0 100%/4px 32px,linear-gradient(var(--c),var(--c)) 100% 100%/32px 4px,linear-gradient(var(--c),var(--c)) 100% 100%/4px 32px;background-repeat:no-repeat;overflow:hidden}
+.frame.bc{top:24%;bottom:44%}
+.frame::after{content:"";position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,#0000,#7cf0b4,#0000);animation:ln 2.2s ease-in-out infinite alternate}
+@keyframes ln{from{top:4%}to{top:96%}}
+.panel{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:14px 16px calc(16px + env(safe-area-inset-bottom));display:grid;gap:10px;max-height:62vh}
+.msg{text-align:center;min-height:1.5em;text-shadow:0 1px 4px #000}
+.shutter{width:76px;height:76px;border-radius:50%;border:5px solid #fff;background:#fff3;margin:0 auto;cursor:pointer;position:relative}
+.shutter::after{content:"";position:absolute;inset:6px;border-radius:50%;background:#fff}
+.shutter:active::after{inset:10px}
+.panel input{background:#000a;color:#fff;border-color:#fff4}
+.res{display:grid;gap:8px;overflow:auto}
+.res button{display:flex;gap:12px;text-align:left;align-items:center;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:8px;cursor:pointer}
+.res img{width:58px;height:58px;object-fit:cover;border-radius:4px;background:var(--line);flex:none}
+.res small{display:block;color:var(--mut)}
+dialog.pl{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0;background:var(--bg);overflow:auto}
+dialog.pl[open]{display:block}
+.pl .bg{position:fixed;inset:-10%;width:120%;height:120%;object-fit:cover;filter:blur(70px) saturate(1.5);opacity:.5;pointer-events:none}
+.plx{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 16px 8px}
+.plw{position:relative;max-width:1100px;margin:0 auto;padding:10px 22px 60px;display:grid;gap:28px}
+@media(min-width:860px){.plw{grid-template-columns:390px 1fr;align-items:center;min-height:calc(100dvh - 76px)}}
+.sleeve{position:relative;aspect-ratio:1;width:min(76vw,370px);margin:0 auto 26px}
+.dkw{position:absolute;top:3%;left:3%;width:94%;aspect-ratio:1;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.pd{width:100%;aspect-ratio:1;border-radius:50%;background:var(--holo);position:relative;animation:sp 5s linear infinite;animation-play-state:paused;box-shadow:0 10px 40px #0008}
+.pd::after{content:"";position:absolute;inset:38%;border-radius:50%;background:var(--bg2)}
+.playing .dkw{transform:translateX(24%)}.playing .pd{animation-play-state:running}
+.sleeve .cv{transition:transform .8s cubic-bezier(.2,.8,.2,1);box-shadow:0 22px 60px #000a;font-size:4rem}
+.playing .sleeve .cv{transform:translateX(-5%) rotate(-2deg)}
+.ttl{font-size:clamp(1.3rem,3vw,1.75rem);font-weight:800;text-align:center;line-height:1.2;letter-spacing:-.02em}
+.meta{text-align:center;color:var(--mut);margin:4px 0 16px}
+.prog{height:5px;border-radius:9px;background:#ffffff26;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--holo)}
+.tm{display:flex;justify-content:space-between;font-size:.8rem;color:var(--mut);margin:5px 0 8px;font-variant-numeric:tabular-nums}
+.ctl{display:flex;justify-content:center;align-items:center;gap:26px}
+.ctl button{background:none;border:0;color:var(--ink);cursor:pointer;padding:10px;border-radius:50%;display:grid;place-items:center}
+.ctl .pp{width:66px;height:66px;background:var(--ink);color:var(--bg);transition:transform .2s}.ctl .pp:active{transform:scale(.92)}
+.ctl svg{width:26px;height:26px;fill:currentColor}.pp svg{width:30px;height:30px}
+.note{text-align:center;font-size:.75rem;color:var(--mut);margin-top:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.tl li{animation:rise .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*45ms)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.tl button{width:100%;display:flex;align-items:center;gap:0;text-align:left;border:0;background:none;color:var(--ink);cursor:pointer;font-size:clamp(1.05rem,2.3vw,1.45rem);font-weight:700;letter-spacing:-.01em;padding:9px 22px;border-radius:99px;transition:background .35s,padding .35s}
+.tl button:hover{background:#ffffff14}
+.tl .on{background:color-mix(in srgb,var(--acc) 42%,transparent);padding-left:18px}
+.tl small{margin-left:auto;font-weight:400;font-size:.8rem;color:var(--mut);padding-left:10px}
+.tl .nop .nm{opacity:.5}
+.eq{display:flex;gap:3px;align-items:flex-end;height:16px;width:0;overflow:hidden;transition:width .35s}
+.on .eq{width:22px}.eq b{width:4px;height:30%;background:currentColor;border-radius:2px}
+.playing .on .eq b{animation:bar .7s ease-in-out infinite alternate}.eq b:nth-child(2){animation-delay:.2s!important}.eq b:nth-child(3){animation-delay:.4s!important}
+@keyframes bar{to{height:100%}}
+@media(prefers-reduced-motion:reduce){.pd,.tl li,.eq b{animation:none!important}}
+#toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:14px;z-index:99;display:none;max-width:90vw;text-align:center}
+@media(min-width:800px){#toast{bottom:30px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span class="mini"></span>Diskotek</div>
+  <input class="search" id="q" type="search" placeholder="Sanatçı, albüm, barkod ara" aria-label="Ara">
+  <div class="dsk"><button class="btn p" id="bAI">Kamerayla tanı</button><button class="btn" id="bBC">Barkod</button><button class="btn" id="bMan">Elle ekle</button><button class="btn" id="bSet">Yedek</button></div>
+</header>
+<main>
+  <section class="hero"><div class="bigdisc" aria-hidden="true"></div>
+    <div><h1><span id="n">0</span> CD</h1><p class="sub" id="sub"></p><div class="chips" id="chips"></div></div></section>
+  <div class="bar"><span></span><select id="sort" aria-label="Sırala"><option value="added">Son eklenen</option><option value="artist">Sanatçı A-Z</option><option value="title">Albüm A-Z</option><option value="year">Yıl</option></select></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden><b>Raflar boş.</b><br>İlk CD'ni eklemek için kamerayı aç, bir CD'nin ön ve arka yüzünü göster.</div>
+</main>
+<nav class="tabs"><button class="btn" id="tMan">＋ Elle ekle</button><button class="fab" id="tAI" aria-label="Kamerayla tanı">Tara</button><button class="btn" id="tBC">▥ Barkod</button></nav>
+
+<dialog id="dEdit"><div class="dh"><span id="eT">CD bilgileri</span><button class="btn" data-close>Kapat</button></div>
+  <div class="db">
+    <div class="cov"><img id="eImg" alt="Kapak"><div style="display:grid;gap:8px;flex:1"><label>Kapak fotoğrafı yükle<input type="file" id="eFile" accept="image/*"></label><button class="btn" id="eFind" type="button">Kapağı ve baskıyı bul</button></div></div>
+    <div class="f2"><label>Sanatçı<input id="eArtist"></label><label>Albüm<input id="eTitle"></label></div>
+    <div class="f2"><label>Yıl<input id="eYear" inputmode="numeric"></label><label>Etiket<input id="eLabel"></label></div>
+    <div class="f2"><label>Katalog no<input id="eCat"></label><label>Ülke<input id="eCountry"></label></div>
+    <div class="f2"><label>Barkod<input id="eBar" inputmode="numeric"></label><label>Durum<select id="eCond"><option>Mükemmel</option><option>Çok iyi</option><option>İyi</option><option>Orta</option><option>Kötü</option></select></label></div>
+    <label>Baskı / sürüm notu<input id="eEd" placeholder="Örn. Japonya baskısı, remaster, deluxe"></label>
+    <label>Notlar<textarea id="eNote"></textarea></label>
+    <div class="row"><button class="btn p" id="eSave">Kaydet</button><button class="btn d" id="eDel">Sil</button></div>
+  </div></dialog>
+
+<dialog id="dCam" class="cam"><video id="vid" playsinline muted></video><div class="shade"></div><div class="frame" id="frame"></div>
+  <div class="top"><button class="btn" data-close>Kapat</button><div class="steps" id="steps"></div></div>
+  <div class="panel"><div class="msg" id="cMsg" role="status"></div>
+    <button class="shutter" id="cShot" aria-label="Fotoğraf çek"></button>
+    <input id="cBar2" inputmode="numeric" placeholder="Barkodu elle yaz ve Enter'a bas" hidden>
+    <div class="res" id="cRes"></div></div></dialog>
+
+<dialog id="dSet"><div class="dh"><span>Yedek ve aktarım</span><button class="btn" data-close>Kapat</button></div>
+  <div class="db"><p style="margin:0;color:var(--mut)">CD'lerin bu cihazın tarayıcısında saklanır. Telefon ve bilgisayar arasında taşımak için yedek al ve diğer cihaza yükle.</p>
+  <div class="row"><button class="btn p" id="xJson">Yedek indir (JSON)</button><button class="btn" id="xCsv">Excel için CSV</button><label class="btn" style="color:var(--ink)">Yedek yükle<input type="file" id="iJson" accept=".json" hidden></label></div></div></dialog>
+<dialog id="dPl" class="pl"><img class="bg" id="plBg" alt="">
+  <div class="plx"><button class="btn" data-close>Kapat</button><button class="btn" id="plEdit">Düzenle</button></div>
+  <div class="plw"><div>
+    <div class="sleeve"><div class="dkw"><div class="pd"></div></div><div class="cv"><img id="plImg" alt="Albüm kapağı"></div></div>
+    <div class="ttl" id="plTitle"></div><div class="meta" id="plMeta"></div>
+    <div class="prog"><i id="plBar"></i></div><div class="tm"><span id="plT">0:00</span><span>0:15</span></div>
+    <div class="ctl"><button id="plPrev" aria-label="Önceki şarkı"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button><button class="pp" id="plPlay" aria-label="Çal / duraklat"></button><button id="plNext" aria-label="Sonraki şarkı"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button></div>
+    <p class="note">Her şarkıdan 15 saniyelik önizleme çalar. Önizlemeler iTunes'tan gelir.</p></div>
+    <ol class="tl" id="plList"></ol></div></dialog>
+<div id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+let cds=[],cur=null,stream=null,timer=null,mode='',shots=[],dec='';
+/* ---------- depolama ---------- */
+const dbp=new Promise((ok,no)=>{const r=indexedDB.open('cdkoleksiyon',1);r.onupgradeneeded=()=>r.result.createObjectStore('cds',{keyPath:'id'});r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
+const tx=async(m,f)=>{const d=await dbp;return new Promise((ok,no)=>{const r=f(d.transaction('cds',m).objectStore('cds'));r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})};
+const load=async()=>{cds=await tx('readonly',s=>s.getAll());render()};
+const put=async c=>{await tx('readwrite',s=>s.put(c));await load()};
+const del=async id=>{await tx('readwrite',s=>s.delete(id));await load()};
+/* ---------- yardımcılar ---------- */
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(t,ms=4000){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',ms)}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const coverUrl=m=>m?`https://coverartarchive.org/release/${m}/front-500`:'';
+const imgSrc=c=>c.cover||c.photo||'';
+const shrink=(src,max=500)=>new Promise(ok=>{const i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',.8))};i.src=src});
+const readFile=f=>new Promise(ok=>{const r=new FileReader();r.onload=()=>ok(r.result);r.readAsDataURL(f)});
+const words=t=>(String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').match(/[a-z0-9]{3,}/g)||[]);
+/* ---------- liste ---------- */
+function render(){
+  const q=$('#q').value.trim().toLowerCase(),s=$('#sort').value;
+  const decs=[...new Set(cds.filter(c=>c.year).map(c=>c.year.slice(0,3)+'0'))].sort();
+  if(dec&&!decs.includes(dec))dec='';
+  $('#chips').innerHTML=decs.length?['',...decs].map(d=>`<button class="chip${d===dec?' on':''}" data-d="${d}">${d?d+'’ler':'Tümü'}</button>`).join(''):'';
+  let l=cds.filter(c=>(!q||[c.artist,c.title,c.label,c.barcode,c.catno,c.edition].join(' ').toLowerCase().includes(q))&&(!dec||(c.year||'').slice(0,3)+'0'===dec));
+  l.sort((a,b)=>s==='added'?b.added-a.added:s==='year'?(a.year||'9999').localeCompare(b.year||'9999'):(a[s]||'').localeCompare(b[s]||'','tr'));
+  $('#n').textContent=cds.length;
+  const ys=cds.map(c=>+c.year).filter(Boolean);
+  $('#sub').textContent=cds.length?`${new Set(cds.map(c=>(c.artist||'').toLowerCase())).size} sanatçı`+(ys.length?` · ${Math.min(...ys)}–${Math.max(...ys)}`:'')+(q||dec?` · ${l.length} sonuç`:''):'Koleksiyonun burada görünecek';
+  $('#empty').hidden=cds.length>0;
+  $('#grid').innerHTML=l.map(c=>`<button class="cd" data-id="${c.id}"><div class="wrap"><span class="dk"></span><div class="cv">${imgSrc(c)?`<img loading="lazy" alt="" src="${esc(imgSrc(c))}">`:'💿'}</div></div><div class="t"><b>${esc(c.title||'Adsız')}</b><small>${esc(c.artist||'Bilinmiyor')}${c.year?' · '+esc(c.year):''}</small></div></button>`).join('');
+  $('#grid').querySelectorAll('img').forEach(im=>im.onerror=()=>{const c=cds.find(x=>x.id===im.closest('.cd').dataset.id);im.onerror=null;if(c&&c.photo)im.src=c.photo;else im.remove()});
+}
+$('#q').oninput=render;$('#sort').onchange=render;
+$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(b){dec=b.dataset.d;render()}};
+$('#grid').onclick=e=>{const b=e.target.closest('.cd');if(b)openPlayer(cds.find(c=>c.id===b.dataset.id))};
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('dialog').close());
+/* ---------- form ---------- */
+const F={artist:'#eArtist',title:'#eTitle',year:'#eYear',label:'#eLabel',catno:'#eCat',country:'#eCountry',barcode:'#eBar',condition:'#eCond',edition:'#eEd',notes:'#eNote'};
+function openEdit(c){
+  cur=c?{...c}:{id:uid(),added:Date.now(),condition:'Mükemmel'};
+  $('#eT').textContent=c?'CD bilgileri':'Yeni CD';
+  for(const k in F)$(F[k]).value=cur[k]||'';
+  $('#eImg').src=imgSrc(cur)||'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>';
+  $('#eDel').hidden=!c;$('#dEdit').showModal();
+}
+$('#bMan').onclick=$('#tMan').onclick=()=>openEdit();
+$('#eFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;cur.photo=await shrink(await readFile(f));cur.cover='';$('#eImg').src=cur.photo};
+$('#eSave').onclick=async()=>{for(const k in F)cur[k]=$(F[k]).value.trim();if(!cur.title&&!cur.artist)return toast('Sanatçı veya albüm adı yaz.');await put(cur);$('#dEdit').close();toast('Kaydedildi')};
+$('#eDel').onclick=async()=>{if(confirm('Bu CD silinsin mi?')){await del(cur.id);$('#dEdit').close();toast('Silindi')}};
+$('#eFind').onclick=async()=>{
+  const a=$('#eArtist').value.trim(),t=$('#eTitle').value.trim(),b=$('#eBar').value.trim();
+  if(!b&&!(a&&t))return toast('Barkod ya da sanatçı + albüm adı yaz.');
+  toast('Aranıyor…');
+  try{const r=b?await mbBarcode(b):await mbSearch(a,t);
+    if(!r.length)return toast('Eşleşme yok. Kapağı fotoğraf olarak yükleyebilirsin.');
+    $('#dEdit').close();showCam('Baskıyı seç');
+    showResults(r,m=>{cur={...cur,...pick(m,cur)};$('#dCam').close();openEdit(cur)});
+  }catch(e){toast('Arama başarısız: '+e.message)}
+};
+/* ---------- MusicBrainz ---------- */
+const mbq=async(q,n=10)=>{const r=await fetch('https://musicbrainz.org/ws/2/release/?fmt=json&limit='+n+'&query='+encodeURIComponent(q));if(!r.ok)throw Error('MusicBrainz '+r.status);return(await r.json()).releases||[]};
+const norm=r=>({mbid:r.id,title:r.title,artist:(r['artist-credit']||[]).map(a=>a.name+(a.joinphrase||'')).join(''),year:(r.date||'').slice(0,4),country:r.country||'',label:r['label-info']?.[0]?.label?.name||'',catno:r['label-info']?.[0]?.['catalog-number']||'',barcode:r.barcode||'',format:(r.media||[]).map(m=>m.format).filter(Boolean).join(' + ')});
+const mbBarcode=async b=>(await mbq('barcode:'+b.replace(/\D/g,''))).map(norm);
+const mbSearch=async(a,t)=>(await mbq(`release:"${t.replace(/"/g,'')}" AND artist:"${a.replace(/"/g,'')}"`)).map(norm);
+const pick=(m,base={})=>({...base,artist:m.artist,title:m.title,year:m.year,country:m.country,label:m.label,catno:m.catno,barcode:m.barcode||base.barcode||'',edition:base.edition||[m.format,m.country&&m.year?`${m.country} ${m.year} baskısı`:''].filter(Boolean).join(' · '),mbid:m.mbid,cover:coverUrl(m.mbid)});
+function showResults(list,cb){
+  $('#cRes').innerHTML=list.map((m,i)=>`<button data-i="${i}"><img alt="" src="${coverUrl(m.mbid)}" onerror="this.style.visibility='hidden'"><span><b>${esc(m.title)}</b><small>${esc(m.artist)}</small><small>${[m.year,m.country,m.label,m.catno,m.format].filter(Boolean).map(esc).join(' · ')}</small></span></button>`).join('');
+  $('#cRes').onclick=e=>{const b=e.target.closest('button');if(b)cb(list[b.dataset.i])};
+}
+/* ---------- kamera ---------- */
+const camStop=()=>{clearInterval(timer);timer=null;stream?.getTracks().forEach(t=>t.stop());stream=null;try{window._zx?.reset()}catch{}};
+$('#dCam').addEventListener('close',()=>{camStop();mode=''});
+async function camStart(){stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920}},audio:false});$('#vid').srcObject=stream;await $('#vid').play()}
+const frame=(max=1600)=>{const v=$('#vid'),k=Math.min(1,max/Math.max(v.videoWidth,v.videoHeight)),c=document.createElement('canvas');c.width=v.videoWidth*k;c.height=v.videoHeight*k;c.getContext('2d').drawImage(v,0,0,c.width,c.height);return c.toDataURL('image/jpeg',.9)};
+const say=t=>$('#cMsg').textContent=t;
+function showCam(msg){$('#cRes').innerHTML='';$('#cRes').onclick=null;say(msg||'');$('#cShot').hidden=true;$('#cBar2').hidden=true;if(!$('#dCam').open)$('#dCam').showModal()}
+const stepUI=n=>{$('#steps').innerHTML=['Ön yüz','Arka yüz'].map((s,i)=>`<i class="${i===n?'on':''}">${s}</i>`).join('')};
+/* cihazda çalışan tanıma: yazı okuma (OCR) + barkod çözme + albüm veritabanı eşleştirme */
+async function startAI(){
+  mode='ai';shots=[];showCam('CD kapağının ön yüzünü çerçeveye sığdır.');$('#frame').className='frame';$('#cShot').hidden=false;stepUI(0);
+  try{await camStart()}catch{say('Kamera açılamadı. Tarayıcıda kamera iznini kontrol et.')}
+}
+$('#bAI').onclick=$('#tAI').onclick=startAI;
+$('#cShot').onclick=async()=>{
+  if(mode!=='ai')return;
+  shots.push(frame());
+  if(shots.length===1){stepUI(1);say('Şimdi CD\'yi çevir, arka yüzü (parça listesi ve barkod) göster.');return}
+  $('#cShot').hidden=true;$('#steps').innerHTML='';camStop();
+  try{await identify(shots)}catch(e){say('Tanıma başarısız: '+e.message);$('#cRes').innerHTML='<button id="rt"><span><b>Tekrar dene</b></span></button><button id="rm"><span><b>Elle kaydet</b></span></button>';$('#rt').onclick=startAI;$('#rm').onclick=async()=>{$('#dCam').close();openEdit();cur.photo=await shrink(shots[0]);$('#eImg').src=cur.photo}}
+};
+async function barFromImg(src){
+  const img=await new Promise(ok=>{const i=new Image();i.onload=()=>ok(i);i.src=src});
+  if('BarcodeDetector' in window){try{const r=await new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e']}).detect(img);if(r[0])return r[0].rawValue}catch{}}
+  try{return(await new ZXing.BrowserMultiFormatReader().decodeFromImageElement(img)).getText()}catch{return''}
+}
+async function ocr(src){
+  if(!window.Tesseract)throw Error('Yazı okuma modülü yüklenemedi, internet bağlantını kontrol et.');
+  const r=await Tesseract.recognize(src,'eng',{logger:m=>{if(m.status==='recognizing text')say(`Yazılar okunuyor %${Math.round(m.progress*100)}`);else if(m.status&&m.status.includes('loading'))say('Okuma modeli ilk seferde indiriliyor…')}});
+  return r.data.text
+}
+async function identify(imgs){
+  say('Barkod aranıyor…');
+  let code=await barFromImg(imgs[1])||await barFromImg(imgs[0]),cands=[],sure=false;
+  if(code){try{cands=await mbBarcode(code);sure=cands.length>0}catch{}}
+  const photo=await shrink(imgs[0],500);
+  let tFront='',tBack='';
+  if(!sure){
+    tFront=await ocr(imgs[0]);say('Arka yüz okunuyor…');tBack=await ocr(imgs[1]);
+    const bag=new Set(words(tFront+' '+tBack));
+    const cat=(tBack.match(/\b[A-Z]{2,6}[- ]?\d{3,7}[A-Z]?\b/g)||[]).map(s=>s.replace(/\W/g,'').toLowerCase());
+    const terms=[...new Set(words(tFront))].slice(0,8);
+    if(!terms.length&&!cat.length)throw Error('Kapaktaki yazılar okunamadı. Daha iyi ışıkta tekrar dene.');
+    say('Albüm veritabanında aranıyor…');
+    const q=terms.length?`(${terms.map(t=>`artist:${t} OR release:${t}`).join(' OR ')})`:'';
+    const rs=(await mbq((q||'catno:'+cat[0])+' AND format:CD',25)).map(norm);
+    cands=rs.map(m=>{const tk=words(m.artist+' '+m.title);let s=tk.length?tk.filter(t=>bag.has(t)).length/tk.length:0;if(m.catno&&cat.includes(m.catno.replace(/\W/g,'').toLowerCase()))s+=.5;return{m,s}}).sort((a,b)=>b.s-a.s);
+    sure=cands[0]&&cands[0].s>=.9;cands=cands.slice(0,6).map(x=>x.m);
+  }
+  const base={id:uid(),added:Date.now(),condition:'Mükemmel',photo,barcode:code||''};
+  const save=async m=>{
+    if(cds.some(x=>(m.barcode&&x.barcode===m.barcode)||x.mbid===m.mbid)){$('#dCam').close();return toast('Bu CD koleksiyonda zaten var.')}
+    await put(pick(m,base));$('#dCam').close();toast(`Kaydedildi: ${m.artist} – ${m.title}`)};
+  if(sure&&cands.length===1||sure&&code)return save(cands[0]);
+  if(sure)return save(cands[0]);
+  if(!cands.length){$('#dCam').close();openEdit();cur.photo=photo;cur.barcode=code||'';$('#eImg').src=photo;return toast('Eşleşme bulunamadı. Bilgileri elle tamamla.',5000)}
+  say('Emin olamadım. Doğru baskıya dokun, kaydedeyim.');
+  showResults(cands,save);
+  const o=document.createElement('button');o.innerHTML='<span><b>Hiçbiri, elle kaydet</b></span>';o.onclick=()=>{$('#dCam').close();openEdit();cur.photo=photo;cur.barcode=code||'';$('#eImg').src=photo};$('#cRes').append(o);
+}
+/* barkod tarama */
+async function startBC(){
+  mode='bc';showCam('Barkodu çerçevenin içine getir.');$('#frame').className='frame bc';$('#steps').innerHTML='';$('#cBar2').hidden=false;
+  try{await camStart()}catch{return say('Kamera açılamadı. Barkodu aşağıya yazabilirsin.')}
+  const done=c=>{if(mode!=='bc')return;mode='';camStop();lookup(c)};
+  if('BarcodeDetector' in window){const d=new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e']});timer=setInterval(async()=>{try{const r=await d.detect($('#vid'));if(r[0])done(r[0].rawValue)}catch{}},350)}
+  else if(window.ZXing){window._zx=new ZXing.BrowserMultiFormatReader();window._zx.decodeFromVideoElement($('#vid'),r=>{if(r)done(r.getText())})}
+}
+$('#bBC').onclick=$('#tBC').onclick=startBC;
+$('#cBar2').onkeydown=e=>{if(e.key==='Enter'&&e.target.value.trim()){mode='';camStop();lookup(e.target.value.trim())}};
+async function lookup(code){
+  say(`Barkod ${code} aranıyor…`);$('#cBar2').hidden=true;
+  try{const l=await mbBarcode(code);
+    if(!l.length){$('#dCam').close();openEdit();cur.barcode=code;$(F.barcode).value=code;return toast('Bu barkod bulunamadı. Bilgileri elle girebilirsin.')}
+    say('Doğru baskıya dokun, kaydedeyim.');
+    showResults(l,async m=>{if(cds.some(x=>x.mbid===m.mbid||(m.barcode&&x.barcode===m.barcode)))return toast('Bu CD zaten koleksiyonda.');await put(pick(m,{id:uid(),added:Date.now(),condition:'Mükemmel',barcode:code}));$('#dCam').close();toast(`Kaydedildi: ${m.artist} – ${m.title}`)});
+  }catch(e){say('Arama başarısız: '+e.message)}
+}
+/* ---------- oynatıcı: şarkı listesi + 15 sn önizleme ---------- */
+const au=new Audio(),LIM=15,enc=encodeURIComponent;let pl={cd:null,tr:[],i:-1};
+const jget=async u=>{const r=await fetch(u);if(!r.ok)throw 0;return r.json()};
+const IC={play:'<svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg>',pause:'<svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>'};
+async function getTracks(c){
+  if(c.tracks?.length)return c.tracks;
+  let tr=[];const tk=words(c.title),ak=words(c.artist);
+  for(const cc of ['&country=tr','']){
+    try{
+      const s=await jget(`https://itunes.apple.com/search?term=${enc(c.artist+' '+c.title)}&entity=album&limit=8${cc}`);
+      const sc=x=>{const t=words(x.collectionName),a=words(x.artistName);return(tk.length?tk.filter(w=>t.includes(w)).length/tk.length:0)+(ak.length?ak.filter(w=>a.includes(w)).length/ak.length:0)};
+      const b=(s.results||[]).map(x=>({x,s:sc(x)})).sort((p,q)=>q.s-p.s)[0];
+      if(b&&b.s>=1.4){const l=await jget(`https://itunes.apple.com/lookup?id=${b.x.collectionId}&entity=song${cc}`);
+        tr=(l.results||[]).filter(x=>x.kind==='song').map(x=>({name:x.trackName,url:x.previewUrl||''}));if(tr.length)break}
+    }catch{}
+  }
+  if(!tr.length&&c.mbid){try{const r=await jget(`https://musicbrainz.org/ws/2/release/${c.mbid}?inc=recordings&fmt=json`);tr=(r.media||[]).flatMap(m=>m.tracks||[]).map(t=>({name:t.title,url:''}))}catch{}}
+  if(tr.length){c.tracks=tr;await tx('readwrite',s=>s.put(c))}
+  return tr;
+}
+async function openPlayer(c){
+  pl={cd:c,tr:[],i:-1};au.pause();ui();
+  const im=$('#plImg');im.onerror=()=>{im.onerror=null;if(c.photo)im.src=c.photo};
+  im.src=$('#plBg').src=imgSrc(c)||'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>';
+  $('#plTitle').textContent=`${c.artist||''} - ${c.title||''}`;
+  $('#plMeta').textContent=[c.year,c.label,c.edition].filter(Boolean).join(' · ');
+  $('#plBar').style.width='0';$('#plT').textContent='0:00';
+  $('#plList').innerHTML='<li style="--i:0"><button class="nop"><span class="nm">Şarkılar yükleniyor…</span></button></li>';
+  $('#dPl').showModal();
+  const tr=await getTracks(c);if(pl.cd!==c)return;
+  pl.tr=tr;
+  $('#plList').innerHTML=tr.length?tr.map((t,i)=>`<li style="--i:${i}"><button data-i="${i}" class="${t.url?'':'nop'}"><span class="eq"><b></b><b></b><b></b></span><span class="nm">${esc(t.name)}</span>${t.url?'':'<small>önizleme yok</small>'}</button></li>`).join(''):'<li style="--i:0"><button class="nop"><span class="nm">Bu albümün şarkı listesi bulunamadı.</span></button></li>';
+  const f=tr.findIndex(t=>t.url);if(f>=0)playTrack(f);
+}
+function mark(){document.querySelectorAll('#plList button').forEach((b,i)=>b.classList.toggle('on',i===pl.i))}
+function ui(){const p=!au.paused&&pl.i>=0;$('#dPl').classList.toggle('playing',p);$('#plPlay').innerHTML=p?IC.pause:IC.play}
+function playTrack(i){
+  const t=pl.tr[i];if(!t||!t.url)return;
+  pl.i=i;au.src=t.url;au.volume=0;mark();$('#plBar').style.width='0';
+  au.play().catch(()=>toast('Çalmak için oynat tuşuna dokun'));
+}
+function step(d){
+  let j=pl.i+d;while(j>=0&&j<pl.tr.length&&!pl.tr[j].url)j+=d;
+  if(j<0||j>=pl.tr.length){au.pause();if(d>0){pl.i=-1;mark();$('#plBar').style.width='0'}return}
+  playTrack(j);
+}
+au.ontimeupdate=()=>{const t=au.currentTime;au.volume=Math.max(0,Math.min(1,t/.8,(LIM-t)/1.2));$('#plBar').style.width=Math.min(100,t/LIM*100)+'%';$('#plT').textContent='0:'+String(Math.min(LIM,Math.floor(t))).padStart(2,'0');if(t>=LIM)step(1)};
+au.onplay=au.onpause=ui;au.onended=()=>step(1);
+au.onerror=()=>{if(pl.cd){toast('Bu önizleme açılamadı, sıradakine geçiliyor.');step(1)}};
+$('#plList').onclick=e=>{const b=e.target.closest('button[data-i]');if(b&&!b.classList.contains('nop'))playTrack(+b.dataset.i)};
+$('#plPlay').onclick=()=>{if(pl.i<0){const f=pl.tr.findIndex(t=>t.url);if(f>=0)playTrack(f)}else au.paused?au.play():au.pause()};
+$('#plNext').onclick=()=>step(1);
+$('#plPrev').onclick=()=>au.currentTime>3?(au.currentTime=0):step(-1);
+$('#plEdit').onclick=()=>{const c=pl.cd;$('#dPl').close();openEdit(c)};
+$('#dPl').addEventListener('close',()=>{au.pause();pl.cd=null;pl.i=-1});
+ui();
+/* ---------- yedek ---------- */
+$('#bSet').onclick=()=>$('#dSet').showModal();
+const dl=(n,t,ty)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:ty}));a.download=n;a.click()};
+$('#xJson').onclick=()=>dl('diskotek-yedek.json',JSON.stringify(cds),'application/json');
+$('#xCsv').onclick=()=>{const k=['artist','title','year','label','catno','barcode','country','edition','condition','notes'];dl('diskotek.csv','\ufeff'+[k.join(','),...cds.map(c=>k.map(x=>'"'+String(c[x]||'').replace(/"/g,'""')+'"').join(','))].join('\n'),'text/csv')};
+$('#iJson').onchange=async e=>{try{const l=JSON.parse(await e.target.files[0].text());for(const c of l)await tx('readwrite',s=>s.put(c));await load();toast(l.length+' CD yüklendi')}catch{toast('Dosya okunamadı')}};
+load();
+</script>
+</body>
+</html>
