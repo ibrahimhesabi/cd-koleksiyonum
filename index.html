@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="CDECK">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#07080f;--bg2:#0e1020;--card:#13162b;--ink:#f2f3fb;--mut:#8c93b5;--line:#ffffff1a;--acc:#9a8cff;--bad:#ff7a87;--holo:conic-gradient(from 20deg,#ff7ab8,#ffd36e,#7cf0b4,#6ec8ff,#a58bff,#ff7ab8);color-scheme:dark}
 @media(prefers-color-scheme:light){:root{--bg:#f3f1ee;--bg2:#eae7e2;--card:#fff;--ink:#14162a;--mut:#6a6f8c;--line:#14162a1f;--acc:#4b3fe0;--bad:#c2303f;color-scheme:light}}
@@ -115,44 +115,69 @@ dialog.pl{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;bord
 .eq{display:flex;gap:3px;align-items:flex-end;height:16px;width:0;overflow:hidden;transition:width .35s}.on .eq{width:22px}.eq b{width:4px;height:30%;background:currentColor;border-radius:2px}
 .playing .on .eq b{animation:bar .7s ease-in-out infinite alternate}.eq b:nth-child(2){animation-delay:.2s!important}.eq b:nth-child(3){animation-delay:.4s!important}@keyframes bar{to{height:100%}}
 #toast{position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:16px;z-index:99;display:none;max-width:90vw;text-align:center}@media(min-width:800px){#toast{bottom:30px}}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 /* ===== CDECK görünümü ===== */
-@media(prefers-color-scheme:dark){:root{--bg:#08090f;--bg2:#0f111b;--card:#13151f;--line:#ffffff17;--mut:#8b90a8}}
-body{background:radial-gradient(60vw 40vh at 100% -10%,#7b6cff26,transparent),var(--bg);background-attachment:fixed;font-size:15.5px}
-header{background:color-mix(in srgb,var(--bg) 78%,transparent)}
-.logo{font-size:1rem;letter-spacing:.2em}
+:root{--serif:"Instrument Serif",Georgia,serif;--ease:cubic-bezier(.2,.8,.2,1)}
+@media(prefers-color-scheme:dark){:root{--bg:#07070c;--bg2:#0e0f18;--card:#12131d;--line:#ffffff14;--mut:#8a8fa6}}
+body{background:var(--bg);font-size:15.5px}
+body::before{content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;background:radial-gradient(40vw 40vw at 15% 10%,#7b6cff33,transparent 60%),radial-gradient(35vw 35vw at 85% 20%,#ff7ab824,transparent 60%),radial-gradient(40vw 40vw at 60% 90%,#4ec9ff1c,transparent 60%);animation:aur 40s ease-in-out infinite alternate}
+@keyframes aur{to{transform:translate3d(-4%,3%,0) rotate(6deg) scale(1.08)}}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media(prefers-color-scheme:light){body::after{opacity:.035}}
+@media(prefers-reduced-motion:reduce){body::before{animation:none}}
+header{top:calc(8px + env(safe-area-inset-top));margin:calc(8px + env(safe-area-inset-top)) auto 0;width:min(1260px,calc(100% - 20px));padding:9px 12px 9px 16px;border:1px solid var(--line);border-radius:22px;background:color-mix(in srgb,var(--bg2) 60%,transparent);backdrop-filter:blur(26px) saturate(1.7);box-shadow:0 12px 40px #0003}
+.logo{font-size:.95rem;letter-spacing:.24em}.mini{animation:sp 12s linear infinite}
+.search{border-radius:99px;padding-left:18px}
 input,select,textarea{border-radius:12px}
-.btn{background:transparent;border-radius:12px;padding:9px 15px}.btn:hover{background:#ffffff0f}
-.btn.p{background:var(--ink);color:var(--bg);border:0}.btn.p:hover{opacity:.9}.btn.d{border-color:transparent}
-main{padding-top:26px}
-.hero{display:flex;gap:18px;align-items:center;margin-bottom:22px}
-.bigdisc{width:clamp(64px,16vw,104px);flex:none;box-shadow:0 10px 40px #7b6cff40}
-h1{font-size:clamp(2.3rem,8vw,3.8rem);font-weight:700;letter-spacing:-.04em;line-height:1}
-.sub{margin:6px 0 10px}
-.chip{font-size:.85rem;padding:4px 13px}
-.bar{justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:22px}
-.grid{gap:30px 20px}
-.cd .t b{font-size:.95rem;font-weight:600}.cd small{font-size:.82rem}
-.bdg{display:inline-block;margin-top:5px;font-style:normal;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}.bdg.f{background:var(--acc);border-color:var(--acc);color:#0b0d17}
+.btn{background:transparent;border-radius:12px;padding:9px 15px;transition:transform .2s,background .3s,opacity .3s}.btn:hover{background:#ffffff0f}
+.btn.p{background:var(--ink);color:var(--bg);border:0}.btn.p:hover{opacity:.88}.btn.d{border-color:transparent}
+main{padding-top:6px}
+.hero{display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px;margin:36px 0 22px}
+.hero>*{animation:rise 1s var(--ease) both}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.3em;color:var(--mut);margin-bottom:12px}
+h1{font-size:clamp(3.8rem,15vw,8.6rem);font-weight:800;letter-spacing:-.06em;line-height:.86;display:flex;align-items:baseline;gap:.12em}
+h1 #n{background:linear-gradient(180deg,var(--ink) 30%,color-mix(in srgb,var(--ink) 40%,transparent));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 em{font:italic 400 .5em/1 var(--serif);letter-spacing:0;color:var(--acc)}
+.sub{color:var(--mut);margin:16px 0 14px;font-size:1rem}
+.bigdisc{width:clamp(104px,23vw,250px);margin-right:-3%;box-shadow:0 24px 100px #8f86ff55;animation:sp 22s linear infinite}
+.bigdisc::before{background:repeating-radial-gradient(circle,#0000 0 3px,#0000001a 3px 4px),conic-gradient(from 0deg,#fff0 0 8%,#ffffff55 14%,#fff0 22% 52%,#ffffff40 60%,#fff0 70%)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-bottom:34px}
+.st{padding:15px 17px;border:1px solid var(--line);border-radius:22px;background:color-mix(in srgb,var(--card) 70%,transparent);animation:rise .9s var(--ease) both;min-width:0}
+.st b{display:block;font-size:1.55rem;font-weight:700;letter-spacing:-.03em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.st span{font-size:.76rem;color:var(--mut);letter-spacing:.05em}
+.chip{border-radius:99px;padding:6px 15px;font-size:.84rem;background:color-mix(in srgb,var(--card) 60%,transparent)}.chip:hover{color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--bg);border-color:transparent;font-weight:600}
+.bar{justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:36px 22px}
+@media(min-width:800px){.grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:48px 30px}}
+.cd{transition:transform .6s var(--ease)}.cd:hover{transform:translateY(-6px)}
+.grid .cv{border-radius:4px 10px 10px 4px;box-shadow:0 1px 0 #ffffff22 inset,0 20px 36px -12px #000c,0 4px 10px #0006;transition:box-shadow .6s var(--ease)}
+.cd:hover .cv{box-shadow:0 34px 60px -16px #000e,0 0 0 1px #ffffff22}
+.grid .cv::after{background:linear-gradient(115deg,#fff0 35%,#ffffff30 48%,#fff0 60%) 120% 0/250% 100%;transition:background-position 1s var(--ease)}
+.cd:hover .cv::after{background-position:-20% 0}
+.cd .t{padding-top:15px}.cd b{font-size:.98rem;font-weight:600;letter-spacing:-.01em}.cd small{font-size:.82rem}
+.bdg{display:inline-block;margin-top:6px;font-style:normal;font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}.bdg.f{background:var(--acc);border-color:var(--acc);color:#0b0d17}
 .dk,.pd{background:var(--cv,none) center/cover,var(--holo)}
 .pd::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle,#0000 0 2px,#0000001f 2px 3px),conic-gradient(from 0deg,#fff0 0 8%,#ffffff40 14%,#fff0 22% 52%,#ffffff33 60%,#fff0 70%)}
 .pd::after{inset:40%;box-shadow:0 0 0 7px #ffffff2e,0 0 0 8px #ffffff55}
-.tabs{border-radius:99px;box-shadow:0 8px 30px #0006}.fab{width:62px;height:62px}
+.tabs{border-radius:99px;background:color-mix(in srgb,var(--bg2) 68%,transparent);box-shadow:0 18px 50px #000a}
+.fab{width:64px;height:64px;margin:-34px auto 0;box-shadow:0 0 0 6px color-mix(in srgb,var(--bg) 92%,transparent),0 10px 36px #8f86ff77}
 .warn{background:none;border:1px dashed var(--line);color:var(--mut)}
-.empty{padding:70px 10px}
-.land .hero,.land .bar,.land .warn{display:none}
+.empty{padding:80px 10px;font-size:1.05rem}
+.land .hero,.land .bar,.land .warn,.land .stats{display:none}
+dialog{background:color-mix(in srgb,var(--bg2) 94%,transparent);border-radius:26px;box-shadow:0 40px 100px #000a}
+.dh{padding:16px 20px}
 #bAcc{max-width:36vw;overflow:hidden;text-overflow:ellipsis;display:inline-flex;gap:6px;align-items:center}
 .dot{background:var(--bad);color:#fff;border-radius:99px;font-size:.7rem;padding:1px 7px}
-.viewing{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px;padding:10px 14px;border-radius:16px;background:color-mix(in srgb,var(--acc) 18%,transparent);border:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
+.viewing{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:14px 0 4px;padding:10px 14px;border-radius:18px;background:color-mix(in srgb,var(--acc) 16%,transparent);border:1px solid color-mix(in srgb,var(--acc) 40%,transparent)}
 .fv .tabs,.fv .dsk{display:none!important}
 .fr{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;border:1px solid var(--line);border-radius:16px;background:var(--card);margin-bottom:8px}.fr span{display:flex;gap:6px}.fr .btn{padding:7px 12px;font-size:.85rem}
 .sec{font-weight:800;margin-top:4px}
-.seg2{display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px}.seg2 button{border:0;background:none;border-radius:99px;padding:8px 14px;cursor:pointer;font-weight:600;color:var(--mut)}.seg2 .on{background:var(--ink);color:var(--bg)}
+.seg2{display:grid;grid-template-columns:1fr 1fr;background:color-mix(in srgb,var(--card) 70%,transparent);border:1px solid var(--line);border-radius:99px;padding:3px}.seg2 button{border:0;background:none;border-radius:99px;padding:8px 14px;cursor:pointer;font-weight:600;color:var(--mut);transition:all .35s var(--ease)}.seg2 .on{background:var(--ink);color:var(--bg)}
 .tsel{flex:1 1 230px;max-width:300px}
-.alogo{display:flex;align-items:center;justify-content:center;gap:12px;font-size:1.7rem;font-weight:800;letter-spacing:.16em;margin-top:6px}.mini.big{width:46px;height:46px;animation:sp 10s linear infinite}
+.alogo{display:flex;align-items:center;justify-content:center;gap:12px;font-size:1.7rem;font-weight:800;letter-spacing:.16em;margin-top:6px}.mini.big{width:46px;height:46px}
 dialog.auth::backdrop{background:#000d}
 .qr{width:min(240px,70vw);background:#fff;padding:10px;border-radius:16px}.qr svg{display:block;width:100%}
 .chk{display:flex;align-items:center;gap:8px;text-align:left}.chk input{width:auto}
+.prc{width:120px;height:120px;object-fit:cover;border-radius:6px 14px 14px 6px;box-shadow:0 14px 40px #000a}#dPress .row .btn{flex:1}
 /* oynatıcı düzeltmeleri */
 dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
 .pl .bg{inset:0;width:100%;height:100%;transform:scale(1.3)}
@@ -170,9 +195,9 @@ dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
 </header>
 <main>
   <div class="viewing" id="viewing" hidden></div>
-  <section class="hero"><div class="bigdisc" aria-hidden="true"></div>
-    <div><h1><span id="n">0</span> CD</h1><p class="sub" id="sub"></p><div class="chips" id="chips"></div></div></section>
-  <p class="warn" id="warn" hidden>Koleksiyon şu an sadece bu cihazda saklanıyor. Telefon ve bilgisayarda ortak kullanmak için kurulumu tamamla (Supabase adımları).</p>
+  <section class="hero"><div class="hl"><div class="eyebrow">CD KOLEKSİYONU</div><h1><span id="n">0</span><em>CD</em></h1><p class="sub" id="sub"></p><div class="chips" id="chips"></div></div><div class="bigdisc" aria-hidden="true"></div></section>
+  <div class="stats" id="stats"></div>
+  <p class="warn" id="warn" hidden>Hesap sistemi kapalı: config.js dosyası yok ya da boş. CD'ler şu an sadece bu cihazda saklanıyor.</p>
   <div class="bar"><div class="seg2 tsel" id="tsel"><button data-t="col" class="on">Koleksiyon</button><button data-t="wish">İstediklerim</button></div><button class="btn p" id="wAdd" hidden>＋ İstek ekle</button><select id="sort" aria-label="Sırala"><option value="added">Son eklenen</option><option value="artist">Sanatçı A-Z</option><option value="title">Albüm A-Z</option><option value="year">Yıl</option></select></div>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" hidden><b>Raflar boş.</b><br>İlk CD'ni eklemek için Tara'ya bas.</div>
@@ -192,6 +217,11 @@ dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
   <div class="db"><div id="accInc"></div><div class="sec">Arkadaşlar</div><div id="accList"></div><div id="accOut"></div>
   <div class="row"><input id="fName" placeholder="Arkadaşının kullanıcı adı" autocapitalize="none"><button class="btn p" id="fAdd">Ekle</button></div><div class="err" id="fErr"></div>
   <button class="btn p" id="aShare">Hesabımı paylaş</button><button class="btn d" id="aLogout">Çıkış yap</button></div></dialog>
+
+<dialog id="dPress" class="sheet"><div class="db" style="text-align:center;justify-items:center"><img id="prImg" class="prc" alt=""><b id="prT" style="font-size:1.15rem"></b>
+  <p class="msg2" style="margin:0">Bu CD ilk baskı mı, tekrar basım mı?</p>
+  <div class="row c" style="width:100%"><button class="btn p" data-p="İlk baskı">İlk baskı</button><button class="btn" data-p="Tekrar basım">Tekrar basım</button></div>
+  <button class="btn" data-p="" style="width:100%">Bilmiyorum</button></div></dialog>
 
 <dialog id="dShare" class="sheet"><div class="dh"><span>Hesabımı paylaş</span><button class="btn" data-close>Kapat</button></div>
   <div class="db" style="justify-items:center;text-align:center"><div class="qr" id="shQr"></div><input id="shUrl" readonly>
@@ -240,10 +270,10 @@ dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
 <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script src="config.js"></script>
 <script>
-/* ===== PAYLAŞIMLI KAYIT (Supabase) — kurulumdan sonra bu iki satırı doldur ===== */
-const SB_URL='',SB_ANON='';
-const HOME_USER=''; /* misafirlere varsayılan gösterilecek kullanıcı adı (isteğe bağlı) */
+/* ===== Supabase bilgileri config.js dosyasından okunur ===== */
+const CFG=window.CDECK_CFG||{},SB_URL=CFG.url||'',SB_ANON=CFG.key||'',HOME_USER=(CFG.home||'').toLowerCase();
 /* ================================================================================ */
 const $=s=>document.querySelector(s),enc=encodeURIComponent,remote=!!(SB_URL&&SB_ANON);
 let cds=[],cur=null,dec='',unl=false,keyCb=null,firstDone=false,fCb=null;
@@ -343,6 +373,7 @@ async function addFriend(){
     $('#fName').value='';toast(inc?'Artık arkadaşsınız':'İstek gönderildi');await loadFriends()
   }catch(x){er.textContent=x.message==='409'?'Zaten bir istek veya arkadaşlık var':x.message}}
 $('#fAdd').onclick=addFriend;$('#fName').onkeydown=e=>{if(e.key==='Enter')addFriend()};
+function askPress(r){return new Promise(ok=>{const d=$('#dPress');let v='';$('#prImg').src=imgSrc(r)||blank;$('#prT').textContent=`${r.artist||''} - ${r.title||''}`;d.onclick=e=>{const b=e.target.closest('[data-p]');if(b){v=b.dataset.p;d.close()}};d.onclose=()=>ok(v);d.showModal()})}
 const cvq=c=>imgSrc(c).replace(/'/g,'%27');
 function emptyUI(L){const e=$('#empty');e.hidden=L.length>0;
   e.innerHTML=remote&&!me&&!view?'<b style="font-size:1.4rem">CDECK</b><br>CD koleksiyonunu tut, arkadaşlarınınkine bak.<div class="row c" style="margin-top:18px"><button class="btn p" data-go="in">Giriş yap</button><button class="btn" data-go="up">Hesap oluştur</button></div><p style="margin-top:18px;font-size:.85rem">Bir arkadaşın link ya da QR paylaştıysa onu aç, hesapsız da bakabilirsin.</p>':tab==='wish'?(mine()?'<b>Liste boş.</b><br>Almak istediğin CD\'leri “＋ İstek ekle” ile ekle.':'<b>Bu listede henüz bir şey yok.</b>'):mine()?'<b>Raflar boş.</b><br>İlk CD\'ni eklemek için Tara\'ya bas.':'<b>Bu raf henüz boş.</b>'}
@@ -383,7 +414,9 @@ function render(){
   let l=L.filter(c=>(!q||[c.artist,c.title,c.label,c.barcode,c.catno,c.edition].join(' ').toLowerCase().includes(q))&&(!dec||(c.year||'').slice(0,3)+'0'===dec));
   l.sort((a,b)=>s==='added'?b.added-a.added:s==='year'?(a.year||'9999').localeCompare(b.year||'9999'):(a[s]||'').localeCompare(b[s]||'','tr'));
   countTo(L.length);const ys=L.map(c=>+c.year).filter(Boolean);
-  $('#sub').textContent=L.length?`${new Set(L.map(c=>(c.artist||'').toLowerCase())).size} sanatçı`+(ys.length?` · ${Math.min(...ys)}–${Math.max(...ys)}`:'')+(q||dec?` · ${l.length} sonuç`:''):'Koleksiyonun burada görünecek';
+  $('#sub').textContent=q||dec?`${l.length} sonuç`:tab==='wish'?'Almak istediğin albümler':'Raflarında olanlar';
+  {const art={};L.forEach(c=>{const x=c.artist||'?';art[x]=(art[x]||0)+1});const top=Object.entries(art).sort((p,q)=>q[1]-p[1])[0];
+  $('#stats').innerHTML=L.length?[[Object.keys(art).length,'Sanatçı'],[L.filter(c=>c.press==='İlk baskı').length,'İlk baskı'],[ys.length?Math.min(...ys)+'–'+Math.max(...ys):'–','Dönem'],[top?esc(top[0]):'–','En çok · '+(top?top[1]:0)+' albüm']].map((x,i)=>`<div class="st" style="animation-delay:${i*70}ms"><b>${x[0]}</b><span>${x[1]}</span></div>`).join(''):''}
   emptyUI(L);$('#warn').hidden=remote;
   const anim=!firstDone&&L.length>0;if(anim)firstDone=true;
   $('#grid').innerHTML=l.map((c,i)=>`<button class="cd${anim?' in':''}" style="--i:${i}" data-id="${c.id}"><div class="wrap"><span class="dk" style="--cv:${imgSrc(c)?`url('${esc(cvq(c))}')`:'none'}"></span><div class="cv">${imgSrc(c)?`<img loading="lazy" alt="" src="${esc(imgSrc(c))}">`:'💿'}</div></div><div class="t"><b>${esc(c.title||'Adsız')}</b><small>${esc(c.artist||'Bilinmiyor')}${c.year?' · '+esc(c.year):''}</small>${c.press?`<i class="bdg${c.press==='İlk baskı'?' f':''}">${esc(c.press)}</i>`:''}</div></button>`).join('');
@@ -443,6 +476,7 @@ $('#eAuto').onclick=()=>openFind(($('#eArtist').value+' '+$('#eTitle').value).tr
 $('#eSave').onclick=async()=>{
   if(!await need())return;for(const k in F)cur[k]=$(F[k]).value.trim();
   if(!cur.title&&!cur.artist)return toast('Sanatçı veya albüm adı yaz.');
+  if(!cur.press&&!cur.wish&&!cds.some(x=>x.id===cur.id))cur.press=await askPress(cur);
   try{await store.save(cur);await load();$('#dEdit').close();toast('Kaydedildi')}catch(e){badKey(e);toast('Kaydedilemedi: '+e.message)}};
 $('#eDel').onclick=async()=>{if(!await need()||!confirm('Bu CD silinsin mi?'))return;try{await store.del(cur.id);await load();$('#dEdit').close();toast('Silindi')}catch(e){badKey(e);toast(e.message)}};
 /* ---------- tarama ---------- */
@@ -504,7 +538,7 @@ async function finish(c,base={}){
   try{
     const r=await fullRecord(c,{id:uid(),added:Date.now(),condition:'Mükemmel',...base});if(r.cover)delete r.photo;
     const ex=cds.find(x=>(r.itId&&x.itId===r.itId)||(r.mbid&&x.mbid===r.mbid)||(r.barcode&&x.barcode===r.barcode));if(ex&&ex.wish){delete ex.wish;await store.save(ex);await load();toast('İstediklerimden koleksiyona taşındı')}else if(ex)toast('Bu CD zaten koleksiyonda.');
-    else{await store.save(r);await load();toast(`Kaydedildi: ${r.artist} – ${r.title}`)}
+    else{r.press=await askPress(r);await store.save(r);await load();toast(`Kaydedildi: ${r.artist} – ${r.title}`)}
     $('#dCam').close()}catch(e){badKey(e);say('Kaydedilemedi: '+e.message)}}
 /* kapaktan tanıma: yazı okuma + kapak görüntüsü benzerliği */
 const desc=img=>{const c=document.createElement('canvas');c.width=c.height=24;const x=c.getContext('2d');x.drawImage(img,0,0,24,24);const d=x.getImageData(0,0,24,24).data,v=[];for(let i=0;i<d.length;i+=4)v.push(d[i],d[i+1],d[i+2]);const m=v.reduce((a,b)=>a+b)/v.length,s=Math.sqrt(v.reduce((a,b)=>a+(b-m)**2,0)/v.length)||1;return v.map(a=>(a-m)/s)};
