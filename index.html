@@ -154,7 +154,7 @@ h1 em{font:italic 400 .5em/1 var(--serif);letter-spacing:0;color:var(--acc)}
 .grid .cv::after{background:linear-gradient(115deg,#fff0 35%,#ffffff30 48%,#fff0 60%) 120% 0/250% 100%;transition:background-position 1s var(--ease)}
 .cd:hover .cv::after{background-position:-20% 0}
 .cd .t{padding-top:15px}.cd b{font-size:.98rem;font-weight:600;letter-spacing:-.01em}.cd small{font-size:.82rem}
-.bdg{display:inline-block;margin-top:6px;font-style:normal;font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}.bdg.f{background:var(--acc);border-color:var(--acc);color:#0b0d17}
+.bdg{display:block;width:fit-content;margin-top:6px;font-style:normal;font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}.bdg.f{background:var(--acc);border-color:var(--acc);color:#0b0d17}
 .dk,.pd{background:var(--cv,none) center/cover,var(--holo)}
 .pd::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle,#0000 0 2px,#0000001f 2px 3px),conic-gradient(from 0deg,#fff0 0 8%,#ffffff40 14%,#fff0 22% 52%,#ffffff33 60%,#fff0 70%)}
 .pd::after{inset:40%;box-shadow:0 0 0 7px #ffffff2e,0 0 0 8px #ffffff55}
@@ -178,6 +178,39 @@ dialog.auth::backdrop{background:#000d}
 .qr{width:min(240px,70vw);background:#fff;padding:10px;border-radius:16px}.qr svg{display:block;width:100%}
 .chk{display:flex;align-items:center;gap:8px;text-align:left}.chk input{width:auto}
 .prc{width:120px;height:120px;object-fit:cover;border-radius:6px 14px 14px 6px;box-shadow:0 14px 40px #000a}#dPress .row .btn{flex:1}
+/* ===== FORMATLAR: CD / Plak / Kaset ===== */
+.fmts{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+.fp{display:inline-flex;align-items:center;gap:9px;padding:9px 16px 9px 12px;border-radius:99px;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 60%,transparent);color:var(--mut);font:inherit;font-weight:600;cursor:pointer;transition:all .4s var(--ease)}
+.fp em{font-style:normal;font-size:.75rem;opacity:.65}.fp:hover{color:var(--ink)}.fp.on{background:var(--ink);color:var(--bg);border-color:transparent}
+.ic{width:18px;height:18px;flex:none;display:inline-block;font-style:normal}
+.ic.all{border-radius:5px;background:conic-gradient(#ff7ab8,#ffd36e,#7cf0b4,#6ec8ff,#a58bff,#ff7ab8)}
+.ic.cd{border-radius:50%;background:var(--holo);-webkit-mask:radial-gradient(circle,#0000 0 18%,#000 21%);mask:radial-gradient(circle,#0000 0 18%,#000 21%)}
+.ic.lp{border-radius:50%;background:radial-gradient(circle,#ff7ab8 0 26%,#0000 28%),repeating-radial-gradient(circle,#0c0c10 0 1px,#34343c 1px 2px)}
+.ic.mc{width:24px;height:15px;border-radius:3px;background:radial-gradient(circle at 30% 64%,#fff 0 13%,#0000 15%),radial-gradient(circle at 70% 64%,#fff 0 13%,#0000 15%),linear-gradient(#cfcfd6,#cfcfd6) 50% 16%/72% 26% no-repeat,#2a2d39}
+.land .fmts{display:none}
+.seg2.s3{grid-template-columns:repeat(3,1fr);width:100%}
+.cd .box{aspect-ratio:1;display:grid;align-items:center}.wrap.mc{aspect-ratio:1.58}
+/* plak */
+.dk[data-f=lp],.pd[data-f=lp],.bigdisc[data-f=lp]{background:conic-gradient(from 30deg,#fff0 0 10%,#ffffff24 16%,#fff0 24% 56%,#ffffff1f 64%,#fff0 72%),repeating-radial-gradient(circle,#15151a 0 1.4px,#2a2a33 1.4px 2.8px);box-shadow:0 10px 40px #0008,0 0 0 1px #ffffff2b,inset 0 0 0 2px #ffffff14}
+.dk[data-f=lp]::after,.pd[data-f=lp]::after,.bigdisc[data-f=lp]::after{inset:31%;background:radial-gradient(circle,#0b0b0e 0 5%,#ffffff55 6% 7%,#0000 8%),var(--cv,none) center/cover,var(--acc);box-shadow:0 0 0 2px #0006}
+.wrap.lp .dk{top:0;left:3%;transform:translateY(-13%)}.cd:hover .wrap.lp .dk{transform:translateY(-26%) rotate(50deg)}
+.wrap.lp .cv,.sleeve[data-f=lp] .cv{border-radius:2px;box-shadow:0 22px 40px -14px #000c,0 2px 0 #0006,inset 0 0 0 1px #ffffff14}
+.wrap.lp .cv::before,.sleeve[data-f=lp] .cv::before{width:auto;inset:0;background:radial-gradient(circle at 50% 52%,#0000 56%,#ffffff17 57%,#0000 60%),linear-gradient(135deg,#ffffff26,#0000 28% 72%,#0000003a)}
+/* kaset */
+.dk[data-f=mc],.pd[data-f=mc],.bigdisc[data-f=mc]{border-radius:9px;aspect-ratio:1.58;animation:none;background:radial-gradient(ellipse 8% 12.6% at 33% 76%,#eeeef3 0 60%,#0000 66%),radial-gradient(ellipse 8% 12.6% at 67% 76%,#eeeef3 0 60%,#0000 66%),linear-gradient(#0b0c10,#0b0c10) 50% 76%/64% 34% no-repeat,linear-gradient(160deg,#2d303d,#15171e);box-shadow:inset 0 0 0 1px #ffffff1f,0 10px 30px #0008}
+.dk[data-f=mc]::before,.pd[data-f=mc]::before,.bigdisc[data-f=mc]::before{content:"";position:absolute;inset:9% 7% auto 7%;height:42%;border-radius:4px;background:linear-gradient(#0000 62%,#0000002e 63% 66%,#0000 67%),var(--cv,none) center/cover,#efe9da;box-shadow:inset 0 0 0 2px #0002;animation:none}
+.dk[data-f=mc]::after,.pd[data-f=mc]::after,.bigdisc[data-f=mc]::after{display:none}
+.bigdisc[data-f=mc]{width:clamp(150px,30vw,300px);margin-right:0}
+.pd[data-f=mc] i{position:absolute;top:63.8%;width:15.5%;aspect-ratio:1;border-radius:50%;background:repeating-conic-gradient(#1a1b22 0 24deg,#f1f1f6 24deg 60deg);box-shadow:0 0 0 2px #0006;animation:sp 2.4s linear infinite;animation-play-state:paused}
+.pd[data-f=mc] .rl{left:25.25%}.pd[data-f=mc] .rr{left:59.25%}.playing .pd[data-f=mc] i{animation-play-state:running}
+.wrap.mc .dk{top:0;left:6%;width:88%;transform:translateY(-6%)}.cd:hover .wrap.mc .dk{transform:translateY(-22%)}
+.wrap.mc .cv,.sleeve[data-f=mc] .cv{border-radius:9px;box-shadow:0 22px 38px -14px #000c,inset 0 0 0 1px #ffffff30}
+.wrap.mc .cv::before,.sleeve[data-f=mc] .cv::before{width:12px;background:repeating-linear-gradient(0deg,#00000052 0 2px,#ffffff2b 2px 4px),linear-gradient(90deg,#0008,#0000)}
+.sleeve[data-f=mc]{aspect-ratio:1.58}.dkw[data-f=mc]{aspect-ratio:1.58;top:0}
+/* cd kutusu */
+.wrap.cd .cv,.sleeve[data-f=cd] .cv{border-radius:3px 7px 7px 3px;box-shadow:0 20px 36px -12px #000c,inset 0 0 0 1px #ffffff2e,inset 0 2px 0 #ffffff3a}
+.wrap.cd .cv::before,.sleeve[data-f=cd] .cv::before{width:13px;background:repeating-linear-gradient(0deg,#0000003d 0 2px,#ffffff22 2px 4px),linear-gradient(90deg,#000a,#ffffff30 70%,#0000)}
+.cd:hover .wrap .cv{box-shadow:0 34px 60px -16px #000e,0 0 0 1px #ffffff22}
 /* oynatıcı düzeltmeleri */
 dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
 .pl .bg{inset:0;width:100%;height:100%;transform:scale(1.3)}
@@ -190,14 +223,15 @@ dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
 <header>
   <div class="logo"><span class="mini"></span>CDECK</div>
   <input class="search" id="q" type="search" placeholder="Ara" aria-label="Ara">
-  <div class="dsk"><button class="btn p" id="bScan">CD tara</button><button class="btn" id="bMan">Elle ekle</button><button class="btn" id="bSet">Yedek</button></div>
+  <div class="dsk"><button class="btn p" id="bScan">Tara</button><button class="btn" id="bMan">Elle ekle</button><button class="btn" id="bSet">Yedek</button></div>
   <button class="btn" id="bAcc" aria-label="Hesap"></button>
 </header>
 <main>
   <div class="viewing" id="viewing" hidden></div>
-  <section class="hero"><div class="hl"><div class="eyebrow">CD KOLEKSİYONU</div><h1><span id="n">0</span><em>CD</em></h1><p class="sub" id="sub"></p><div class="chips" id="chips"></div></div><div class="bigdisc" aria-hidden="true"></div></section>
+  <section class="hero"><div class="hl"><div class="eyebrow">KOLEKSİYON</div><h1><span id="n">0</span><em id="unit">CD</em></h1><p class="sub" id="sub"></p><div class="chips" id="chips"></div></div><div class="bigdisc" aria-hidden="true"></div></section>
   <div class="stats" id="stats"></div>
   <p class="warn" id="warn" hidden>Hesap sistemi kapalı: config.js dosyası yok ya da boş. CD'ler şu an sadece bu cihazda saklanıyor.</p>
+  <div class="fmts" id="fsel"></div>
   <div class="bar"><div class="seg2 tsel" id="tsel"><button data-t="col" class="on">Koleksiyon</button><button data-t="wish">İstediklerim</button></div><button class="btn p" id="wAdd" hidden>＋ İstek ekle</button><select id="sort" aria-label="Sırala"><option value="added">Son eklenen</option><option value="artist">Sanatçı A-Z</option><option value="title">Albüm A-Z</option><option value="year">Yıl</option></select></div>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" hidden><b>Raflar boş.</b><br>İlk CD'ni eklemek için Tara'ya bas.</div>
@@ -219,7 +253,8 @@ dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
   <button class="btn p" id="aShare">Hesabımı paylaş</button><button class="btn d" id="aLogout">Çıkış yap</button></div></dialog>
 
 <dialog id="dPress" class="sheet"><div class="db" style="text-align:center;justify-items:center"><img id="prImg" class="prc" alt=""><b id="prT" style="font-size:1.15rem"></b>
-  <p class="msg2" style="margin:0">Bu CD ilk baskı mı, tekrar basım mı?</p>
+  <div class="seg2 s3" id="prF"><button data-f="cd">CD</button><button data-f="lp">Plak</button><button data-f="mc">Kaset</button></div>
+  <p class="msg2" id="prQ" style="margin:0">İlk baskı mı, tekrar basım mı?</p>
   <div class="row c" style="width:100%"><button class="btn p" data-p="İlk baskı">İlk baskı</button><button class="btn" data-p="Tekrar basım">Tekrar basım</button></div>
   <button class="btn" data-p="" style="width:100%">Bilmiyorum</button></div></dialog>
 
@@ -236,7 +271,8 @@ dialog.pl{overflow-x:hidden}.plw{overflow-x:clip}
     <div class="f2"><label>Yıl<input id="eYear" inputmode="numeric"></label><label>Etiket<input id="eLabel"></label></div>
     <div class="f2"><label>Katalog no<input id="eCat"></label><label>Ülke<input id="eCountry"></label></div>
     <div class="f2"><label>Barkod<input id="eBar" inputmode="numeric"></label><label>Durum<select id="eCond"><option>Mükemmel</option><option>Çok iyi</option><option>İyi</option><option>Orta</option><option>Kötü</option></select></label></div>
-    <div class="f2"><label>Baskı<select id="ePress"><option value="">Seçilmedi</option><option>İlk baskı</option><option>Tekrar basım</option></select></label><label>Sürüm notu<input id="eEd" placeholder="Japonya baskısı, remaster"></label></div>
+    <label>Format<select id="eFmt"><option value="cd">CD</option><option value="lp">Plak</option><option value="mc">Kaset</option></select></label>
+  <div class="f2"><label>Baskı<select id="ePress"><option value="">Seçilmedi</option><option>İlk baskı</option><option>Tekrar basım</option></select></label><label>Sürüm notu<input id="eEd" placeholder="Japonya baskısı, remaster"></label></div>
     <label>Notlar<textarea id="eNote"></textarea></label>
     <div class="row"><button class="btn p" id="eSave">Kaydet</button><button class="btn" id="eMove" type="button" hidden>Koleksiyona taşı</button><button class="btn d" id="eDel">Sil</button></div>
   </div></dialog>
@@ -373,15 +409,23 @@ async function addFriend(){
     $('#fName').value='';toast(inc?'Artık arkadaşsınız':'İstek gönderildi');await loadFriends()
   }catch(x){er.textContent=x.message==='409'?'Zaten bir istek veya arkadaşlık var':x.message}}
 $('#fAdd').onclick=addFriend;$('#fName').onkeydown=e=>{if(e.key==='Enter')addFriend()};
-function askPress(r){return new Promise(ok=>{const d=$('#dPress');let v='';$('#prImg').src=imgSrc(r)||blank;$('#prT').textContent=`${r.artist||''} - ${r.title||''}`;d.onclick=e=>{const b=e.target.closest('[data-p]');if(b){v=b.dataset.p;d.close()}};d.onclose=()=>ok(v);d.showModal()})}
+const FMN={cd:'CD',lp:'Plak',mc:'Kaset'};
+let shelf=(()=>{try{return localStorage['cdeck.shelf']||'all'}catch{return 'all'}})();
+const curFmt=()=>shelf==='all'?'cd':shelf;
+function askPress(r){return new Promise(ok=>{const d=$('#dPress');let f=r.fmt||curFmt(),v='';
+  const sync=()=>{document.querySelectorAll('#prF button').forEach(b=>b.classList.toggle('on',b.dataset.f===f));$('#prQ').textContent=`Bu ${FMN[f].toLowerCase()} ilk baskı mı, tekrar basım mı?`};
+  $('#prImg').src=imgSrc(r)||blank;$('#prT').textContent=`${r.artist||''} - ${r.title||''}`;sync();
+  d.onclick=e=>{const g=e.target.closest('#prF button');if(g){f=g.dataset.f;return sync()}const b=e.target.closest('[data-p]');if(b){v=b.dataset.p;d.close()}};
+  d.onclose=()=>ok({press:v,fmt:f});d.showModal()})}
+$('#fsel').onclick=e=>{const b=e.target.closest('[data-f]');if(b){shelf=b.dataset.f;try{localStorage['cdeck.shelf']=shelf}catch{}dec='';render()}};
 const cvq=c=>imgSrc(c).replace(/'/g,'%27');
 function emptyUI(L){const e=$('#empty');e.hidden=L.length>0;
-  e.innerHTML=remote&&!me&&!view?'<b style="font-size:1.4rem">CDECK</b><br>CD koleksiyonunu tut, arkadaşlarınınkine bak.<div class="row c" style="margin-top:18px"><button class="btn p" data-go="in">Giriş yap</button><button class="btn" data-go="up">Hesap oluştur</button></div><p style="margin-top:18px;font-size:.85rem">Bir arkadaşın link ya da QR paylaştıysa onu aç, hesapsız da bakabilirsin.</p>':tab==='wish'?(mine()?'<b>Liste boş.</b><br>Almak istediğin CD\'leri “＋ İstek ekle” ile ekle.':'<b>Bu listede henüz bir şey yok.</b>'):mine()?'<b>Raflar boş.</b><br>İlk CD\'ni eklemek için Tara\'ya bas.':'<b>Bu raf henüz boş.</b>'}
+  e.innerHTML=remote&&!me&&!view?'<b style="font-size:1.4rem">CDECK</b><br>CD koleksiyonunu tut, arkadaşlarınınkine bak.<div class="row c" style="margin-top:18px"><button class="btn p" data-go="in">Giriş yap</button><button class="btn" data-go="up">Hesap oluştur</button></div><p style="margin-top:18px;font-size:.85rem">Bir arkadaşın link ya da QR paylaştıysa onu aç, hesapsız da bakabilirsin.</p>':tab==='wish'?(mine()?'<b>Liste boş.</b><br>Almak istediğin CD\'leri “＋ İstek ekle” ile ekle.':'<b>Bu listede henüz bir şey yok.</b>'):mine()?'<b>Raflar boş.</b><br>İlk albümünü eklemek için Tara\'ya bas.':'<b>Bu raf henüz boş.</b>'}
 $('#empty').onclick=e=>{const b=e.target.closest('[data-go]');if(b){authTab(b.dataset.go);showAuth()}};
 /* istediklerim */
 function setTab(t){tab=t;dec='';document.querySelectorAll('#tsel button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));render()}
 $('#tsel').onclick=e=>{const b=e.target.closest('button');if(b&&b.dataset.t!==tab)setTab(b.dataset.t)};
-$('#wAdd').onclick=async()=>{if(!await need())return;openFind('',async c=>{toast('Ekleniyor…');try{const r=await fullRecord(c,{id:uid(),added:Date.now(),condition:'Mükemmel',wish:true});if(cds.some(x=>(r.itId&&x.itId===r.itId)||(r.mbid&&x.mbid===r.mbid)))return toast('Bu zaten listende');await store.save(r);await load();toast('İstediklerine eklendi')}catch(e){toast(e.message)}})};
+$('#wAdd').onclick=async()=>{if(!await need())return;openFind('',async c=>{toast('Ekleniyor…');try{const r=await fullRecord(c,{id:uid(),added:Date.now(),condition:'Mükemmel',fmt:curFmt(),wish:true});if(cds.some(x=>(r.itId&&x.itId===r.itId)||(r.mbid&&x.mbid===r.mbid)))return toast('Bu zaten listende');await store.save(r);await load();toast('İstediklerine eklendi')}catch(e){toast(e.message)}})};
 $('#eMove').onclick=()=>{cur.wish=false;$('#eSave').click()};
 /* paylaşılan hesap (misafir görünümü) */
 async function openShared(n){const p=await api('profiles?username=eq.'+enc(n)+'&select=id,username');if(!p.length){toast('Bu hesap bulunamadı veya paylaşıma kapalı');return}setView({uid:p[0].id,name:p[0].username});await load()}
@@ -407,19 +451,21 @@ async function boot(){
 /* ---------- liste ---------- */
 function countTo(n){const el=$('#n'),f=+el.textContent||0;if(f===n)return;const t0=performance.now();(function s(t){const p=Math.min(1,(t-t0)/600);el.textContent=Math.round(f+(n-f)*(1-(1-p)**3));if(p<1)requestAnimationFrame(s)})(t0)}
 function render(){
-  const L=cds.filter(c=>tab==='wish'?!!c.wish:!c.wish);document.body.classList.toggle('land',remote&&!me&&!view);$('#wAdd').hidden=!(tab==='wish'&&canEdit());
+  const Lt=cds.filter(c=>tab==='wish'?!!c.wish:!c.wish),L=shelf==='all'?Lt:Lt.filter(c=>(c.fmt||'cd')===shelf);document.body.classList.toggle('land',remote&&!me&&!view);$('#wAdd').hidden=!(tab==='wish'&&canEdit());
   const q=$('#q').value.trim().toLowerCase(),s=$('#sort').value;
   const decs=[...new Set(L.filter(c=>c.year).map(c=>c.year.slice(0,3)+'0'))].sort();if(dec&&!decs.includes(dec))dec='';
   $('#chips').innerHTML=decs.length?['',...decs].map(d=>`<button class="chip${d===dec?' on':''}" data-d="${d}">${d?d+'’ler':'Tümü'}</button>`).join(''):'';
-  let l=L.filter(c=>(!q||[c.artist,c.title,c.label,c.barcode,c.catno,c.edition].join(' ').toLowerCase().includes(q))&&(!dec||(c.year||'').slice(0,3)+'0'===dec));
+  let l=L.filter(c=>(!q||[c.artist,c.title,c.label,c.barcode,c.catno,c.edition,FMN[c.fmt||'cd']].join(' ').toLowerCase().includes(q))&&(!dec||(c.year||'').slice(0,3)+'0'===dec));
   l.sort((a,b)=>s==='added'?b.added-a.added:s==='year'?(a.year||'9999').localeCompare(b.year||'9999'):(a[s]||'').localeCompare(b[s]||'','tr'));
+  $('#fsel').innerHTML=[['all','Hepsi',Lt.length],...Object.keys(FMN).map(k=>[k,FMN[k],Lt.filter(c=>(c.fmt||'cd')===k).length])].map(([k,n,v])=>`<button class="fp${k===shelf?' on':''}" data-f="${k}"><i class="ic ${k}"></i>${n}<em>${v}</em></button>`).join('');
+  $('#unit').textContent={all:'albüm',cd:'CD',lp:'plak',mc:'kaset'}[shelf];document.querySelector('.bigdisc').dataset.f=shelf;
   countTo(L.length);const ys=L.map(c=>+c.year).filter(Boolean);
   $('#sub').textContent=q||dec?`${l.length} sonuç`:tab==='wish'?'Almak istediğin albümler':'Raflarında olanlar';
   {const art={};L.forEach(c=>{const x=c.artist||'?';art[x]=(art[x]||0)+1});const top=Object.entries(art).sort((p,q)=>q[1]-p[1])[0];
   $('#stats').innerHTML=L.length?[[Object.keys(art).length,'Sanatçı'],[L.filter(c=>c.press==='İlk baskı').length,'İlk baskı'],[ys.length?Math.min(...ys)+'–'+Math.max(...ys):'–','Dönem'],[top?esc(top[0]):'–','En çok · '+(top?top[1]:0)+' albüm']].map((x,i)=>`<div class="st" style="animation-delay:${i*70}ms"><b>${x[0]}</b><span>${x[1]}</span></div>`).join(''):''}
   emptyUI(L);$('#warn').hidden=remote;
   const anim=!firstDone&&L.length>0;if(anim)firstDone=true;
-  $('#grid').innerHTML=l.map((c,i)=>`<button class="cd${anim?' in':''}" style="--i:${i}" data-id="${c.id}"><div class="wrap"><span class="dk" style="--cv:${imgSrc(c)?`url('${esc(cvq(c))}')`:'none'}"></span><div class="cv">${imgSrc(c)?`<img loading="lazy" alt="" src="${esc(imgSrc(c))}">`:'💿'}</div></div><div class="t"><b>${esc(c.title||'Adsız')}</b><small>${esc(c.artist||'Bilinmiyor')}${c.year?' · '+esc(c.year):''}</small>${c.press?`<i class="bdg${c.press==='İlk baskı'?' f':''}">${esc(c.press)}</i>`:''}</div></button>`).join('');
+  $('#grid').innerHTML=l.map((c,i)=>`<button class="cd${anim?' in':''}" style="--i:${i}" data-id="${c.id}"><div class="box"><div class="wrap ${c.fmt||'cd'}"><span class="dk" data-f="${c.fmt||'cd'}" style="--cv:${imgSrc(c)?`url('${esc(cvq(c))}')`:'none'}"></span><div class="cv">${imgSrc(c)?`<img loading="lazy" alt="" src="${esc(imgSrc(c))}">`:'💿'}</div></div></div><div class="t"><b>${esc(c.title||'Adsız')}</b><small>${esc(c.artist||'Bilinmiyor')}${c.year?' · '+esc(c.year):''}</small>${c.press?`<i class="bdg${c.press==='İlk baskı'?' f':''}">${esc(c.press)}</i>`:''}</div></button>`).join('');
   $('#grid').querySelectorAll('img').forEach(im=>im.onerror=()=>{const c=L.find(x=>x.id===im.closest('.cd').dataset.id);im.onerror=null;if(c&&c.photo&&im.src!==c.photo)im.src=c.photo;else im.remove()});
 }
 $('#grid').innerHTML='<div class="sk"></div>'.repeat(8);
@@ -463,20 +509,20 @@ function openFind(q,cb){fCb=cb;$('#fQ').value=q||'';$('#fRes').innerHTML='';$('#
 async function doFind(){const q=$('#fQ').value.trim();if(!q)return;$('#fMsg').textContent='Aranıyor…';try{const l=await searchCands(q);$('#fMsg').textContent=l.length?'Doğru albüme dokun.':'Sonuç yok. Yazımı değiştirip tekrar dene.';listCands($('#fRes'),l,async c=>{$('#dFind').close();await fCb(c)})}catch(e){$('#fMsg').textContent='Arama başarısız: '+e.message}}
 $('#fGo').onclick=doFind;$('#fQ').onkeydown=e=>{if(e.key==='Enter')doFind()};
 /* ---------- form ---------- */
-const F={artist:'#eArtist',title:'#eTitle',year:'#eYear',label:'#eLabel',catno:'#eCat',country:'#eCountry',barcode:'#eBar',condition:'#eCond',edition:'#eEd',press:'#ePress',notes:'#eNote'};
+const F={fmt:'#eFmt',artist:'#eArtist',title:'#eTitle',year:'#eYear',label:'#eLabel',catno:'#eCat',country:'#eCountry',barcode:'#eBar',condition:'#eCond',edition:'#eEd',press:'#ePress',notes:'#eNote'};
 function fillForm(){for(const k in F)$(F[k]).value=cur[k]||'';$('#eImg').src=imgSrc(cur)||blank}
-function openEdit(c){cur=c?{...c}:{id:uid(),added:Date.now(),condition:'Mükemmel'};$('#eT').textContent=c?'CD bilgileri':'Yeni CD';fillForm();$('#eDel').hidden=!c;$('#eMove').hidden=!(c&&c.wish);$('#dEdit').showModal()}
+function openEdit(c){cur=c?{...c}:{id:uid(),added:Date.now(),condition:'Mükemmel'};$('#eT').textContent=c?'Albüm bilgileri':'Yeni albüm';fillForm();$('#eFmt').value=cur.fmt||curFmt();$('#eDel').hidden=!c;$('#eMove').hidden=!(c&&c.wish);$('#dEdit').showModal()}
 const gated=fn=>async()=>{if(await need()){if(tab!=='col')setTab('col');fn()}};
 $('#bMan').onclick=$('#tMan').onclick=gated(()=>openEdit());
 $('#eFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;cur.photo=await shrink(await readFile(f));cur.cover='';$('#eImg').src=cur.photo};
 $('#eAuto').onclick=()=>openFind(($('#eArtist').value+' '+$('#eTitle').value).trim(),async c=>{
   toast('Bilgiler dolduruluyor…');
-  const r=await fullRecord(c,{id:cur.id,added:cur.added,condition:$('#eCond').value,notes:$('#eNote').value,press:$('#ePress').value,wish:cur.wish});
+  const r=await fullRecord(c,{id:cur.id,added:cur.added,condition:$('#eCond').value,notes:$('#eNote').value,press:$('#ePress').value,fmt:$('#eFmt').value,wish:cur.wish});
   cur=r;fillForm();toast('Dolduruldu. Kontrol edip Kaydet\'e bas.')});
 $('#eSave').onclick=async()=>{
   if(!await need())return;for(const k in F)cur[k]=$(F[k]).value.trim();
   if(!cur.title&&!cur.artist)return toast('Sanatçı veya albüm adı yaz.');
-  if(!cur.press&&!cur.wish&&!cds.some(x=>x.id===cur.id))cur.press=await askPress(cur);
+  if(!cur.press&&!cur.wish&&!cds.some(x=>x.id===cur.id)){const a=await askPress(cur);cur.press=a.press;cur.fmt=a.fmt}
   try{await store.save(cur);await load();$('#dEdit').close();toast('Kaydedildi')}catch(e){badKey(e);toast('Kaydedilemedi: '+e.message)}};
 $('#eDel').onclick=async()=>{if(!await need()||!confirm('Bu CD silinsin mi?'))return;try{await store.del(cur.id);await load();$('#dEdit').close();toast('Silindi')}catch(e){badKey(e);toast(e.message)}};
 /* ---------- tarama ---------- */
@@ -536,9 +582,10 @@ async function found(code,photo){
 async function finish(c,base={}){
   toast('Kaydediliyor…');say('Kaydediliyor…');$('#cRes').innerHTML='';
   try{
-    const r=await fullRecord(c,{id:uid(),added:Date.now(),condition:'Mükemmel',...base});if(r.cover)delete r.photo;
-    const ex=cds.find(x=>(r.itId&&x.itId===r.itId)||(r.mbid&&x.mbid===r.mbid)||(r.barcode&&x.barcode===r.barcode));if(ex&&ex.wish){delete ex.wish;await store.save(ex);await load();toast('İstediklerimden koleksiyona taşındı')}else if(ex)toast('Bu CD zaten koleksiyonda.');
-    else{r.press=await askPress(r);await store.save(r);await load();toast(`Kaydedildi: ${r.artist} – ${r.title}`)}
+    const r=await fullRecord(c,{id:uid(),added:Date.now(),condition:'Mükemmel',fmt:curFmt(),...base});if(r.cover)delete r.photo;
+    const a=await askPress(r);r.press=a.press;r.fmt=a.fmt;
+    const ex=cds.find(x=>((r.itId&&x.itId===r.itId)||(r.mbid&&x.mbid===r.mbid)||(r.barcode&&x.barcode===r.barcode))&&(x.wish||(x.fmt||'cd')===r.fmt));if(ex&&ex.wish){delete ex.wish;ex.fmt=r.fmt;ex.press=r.press;await store.save(ex);await load();toast('İstediklerimden koleksiyona taşındı')}else if(ex)toast('Bu albüm zaten koleksiyonda.');
+    else{await store.save(r);await load();toast(`Kaydedildi: ${r.artist} – ${r.title}`)}
     $('#dCam').close()}catch(e){badKey(e);say('Kaydedilemedi: '+e.message)}}
 /* kapaktan tanıma: yazı okuma + kapak görüntüsü benzerliği */
 const desc=img=>{const c=document.createElement('canvas');c.width=c.height=24;const x=c.getContext('2d');x.drawImage(img,0,0,24,24);const d=x.getImageData(0,0,24,24).data,v=[];for(let i=0;i<d.length;i+=4)v.push(d[i],d[i+1],d[i+2]);const m=v.reduce((a,b)=>a+b)/v.length,s=Math.sqrt(v.reduce((a,b)=>a+(b-m)**2,0)/v.length)||1;return v.map(a=>(a-m)/s)};
@@ -592,8 +639,8 @@ function showList(){const tr=pl.tr;$('#plList').innerHTML=tr.length?tr.map((t,i)
 async function openPlayer(c){
   pl={cd:c,tr:[],i:-1};au.pause();ui();
   const im=$('#plImg');im.onerror=()=>{im.onerror=null;if(c.photo)im.src=c.photo};
-  im.src=$('#plBg').src=imgSrc(c)||blank;document.querySelector('.pd').style.setProperty('--cv',imgSrc(c)?`url('${cvq(c)}')`:'none');
-  $('#plTitle').textContent=`${c.artist||''} - ${c.title||''}`;$('#plMeta').textContent=[c.press,c.year,c.label,c.edition].filter(Boolean).join(' · ');
+  im.src=$('#plBg').src=imgSrc(c)||blank;document.querySelector('.pd').style.setProperty('--cv',imgSrc(c)?`url('${cvq(c)}')`:'none');{const f=c.fmt||'cd',pd=document.querySelector('.pd');document.querySelector('.sleeve').dataset.f=document.querySelector('.dkw').dataset.f=pd.dataset.f=f;pd.innerHTML=f==='mc'?'<i class="rl"></i><i class="rr"></i>':''}
+  $('#plTitle').textContent=`${c.artist||''} - ${c.title||''}`;$('#plMeta').textContent=[FMN[c.fmt||'cd'],c.press,c.year,c.label,c.edition].filter(Boolean).join(' · ');
   $('#plBar').style.width='0';$('#plT').textContent='0:00';
   $('#plList').innerHTML='<li style="--i:0"><button class="nop"><span class="nm">Şarkılar yükleniyor…</span></button></li>';
   $('#dPl').showModal();
